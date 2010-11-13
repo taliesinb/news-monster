@@ -90,6 +90,10 @@ GAME.monster.tick = function(){
     this.draw();
 }
 
+GAME.child = function(){
+    this.valence = 0.0;
+}
+
 GAME.text_prototype = function(str, val){
     this.content = str;
     this.dist = 600;
@@ -103,6 +107,10 @@ GAME.text_prototype = function(str, val){
         this.angle = Math.random()*(this.maxAngle-this.minAngle) +
            this.minAngle;
     };
+    
+    this.exists = function(){
+        return this.dist>0;
+    }
         
     this.update = function(){
         if(this.dist>=0){
@@ -127,7 +135,7 @@ GAME.text_prototype = function(str, val){
 
 GAME.texts = [];
 
-GAME.timeBetweenTexts = 1.0;
+GAME.timeBetweenTexts = 2.0;
 GAME.textCountdown = GAME.timeBetweenTexts;
 
 GAME.play = function(){
@@ -143,16 +151,31 @@ GAME.play = function(){
    else{
       GAME.textCountdown -= GAME.elapsed;
    }
+   //draw everything
    
    GAME.draw_bg();
+   GAME.monster.draw();
 
-   GAME.monster.tick();
-   
    var len = GAME.texts.length;
-
-   for(var i = 0; i < len; i++){
-      GAME.texts[i].tick();
+   
+   for(var i = 0; i<len; i++){
+      GAME.texts[i].draw();
    }
+   
+   //update everything
+   GAME.monster.update();
+   
+   for(var i = 0; i < len; i++){
+      if( GAME.texts[i].exists() > 0 ){
+         GAME.texts[i].update();
+      }
+      else{
+         GAME.texts.splice(i, 1);
+         len--;
+      }
+   }
+   
+   //done
 
    GAME.previousTime = timeNow;
 }
