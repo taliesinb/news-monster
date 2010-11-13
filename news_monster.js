@@ -28,6 +28,8 @@ function processKeyDown(e){
    }
 }
 
+function processKeyUp(){}
+
 GAME.draw_bg = function (){
    ctxt.lineWidth = 4.0;
    ctxt.strokeStyle='#000000';
@@ -123,37 +125,34 @@ GAME.text_prototype = function(str, val){
     }
 }
 
-GAME.texts = new Array();
+GAME.texts = [];
 
-GAME.timeBetweenTexts = 5.0;
-GAME.textCountdown = this.timeBetweenTexts;
-
-GAME.text1 = new GAME.text_prototype("hello there!", 0);
-GAME.text1.setAngle();
+GAME.timeBetweenTexts = 1.0;
+GAME.textCountdown = GAME.timeBetweenTexts;
 
 GAME.play = function(){
    var timeNow = (new Date()).getTime();
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
    
-   /*if(GAME.textCountdown <= 0){
+   if(GAME.textCountdown <= 0){
       GAME.textCountdown = GAME.timeBetweenTexts;
-      GAME.texts.push(new GAME.text_prototype("hi"));
+      var txt = new GAME.text_prototype("hello", 0);
+      txt.setAngle();
+      GAME.texts.push(txt);
    }
    else{
       GAME.textCountdown -= GAME.elapsed;
-   }*/
+   }
    
    GAME.draw_bg();
 
    GAME.monster.tick();
    
-   GAME.text1.tick();
-   
-   /*var len = GAME.texts.length;
-   
-   for(var i = 0, i < len, i++){
+   var len = GAME.texts.length;
+
+   for(var i = 0; i < len; i++){
       GAME.texts[i].tick();
-   }*/
+   }
 
    GAME.previousTime = timeNow;
 }
