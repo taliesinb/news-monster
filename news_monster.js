@@ -7,6 +7,8 @@ var ctxt = canvas.getContext('2d');
 var stage_width = 600;
 var stage_height = 400;
 
+ctxt.font = "font-family:serif, font-size:12";
+
 function processKeyDown(e){
     var m = GAME.monster;
 
@@ -31,6 +33,7 @@ function processKeyDown(e){
 function processKeyUp(){}
 
 GAME.draw_bg = function (){
+
    ctxt.lineWidth = 4.0;
    ctxt.strokeStyle='#000000';
    ctxt.fillStyle='#FFFFFF';
@@ -102,19 +105,27 @@ GAME.text_prototype = function(str, val){
     this.speed = 100;
     this.angle = 0;
     this.valence = val;
+    this.exists = true
         
     this.setAngle = function(){
         this.angle = Math.random()*(this.maxAngle-this.minAngle) +
            this.minAngle;
     };
-    
-    this.exists = function(){
-        return this.dist>0;
-    }
         
     this.update = function(){
-        if(this.dist>=0){
-            this.dist -= this.speed*GAME.elapsed;
+        var d = this.dist;
+        var a = this.angle;
+        
+        if(d<=0){
+            this.exists = false;
+            GAME.child.valence += this.valence;
+        }
+        else if(d < 100 && d > 85 && a < GAME.monster.angle+.4
+           && a > GAME.monster.angle + .1){
+            this.exists = false;
+        }
+        else{
+           this.dist -= this.speed*GAME.elapsed;
         }
     };
     
@@ -166,7 +177,7 @@ GAME.play = function(){
    GAME.monster.update();
    
    for(var i = 0; i < len; i++){
-      if( GAME.texts[i].exists() > 0 ){
+      if( GAME.texts[i].exists){
          GAME.texts[i].update();
       }
       else{
