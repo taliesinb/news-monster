@@ -37,34 +37,39 @@ function processKeyDown(e){
 }
 
 GAME.draw_bg = function (){
-	
+   ctxt.lineWidth = 20.0;
    ctxt.strokeStyle='#000000';
-   ctxt.fillStyle='#000000';
+   ctxt.fillStyle='#FFFFFF';
    ctxt.fillRect(0,0,stage_width,stage_height);
+   ctxt.rect(0,0,stage_width,stage_height);
 }
 
 GAME.monster = {
     spin:0,
     dist:100,
-    angle:0,
+    angle:-Math.PI/2,
     dangle:0,
-    dangleMax:2,
+    dangleMax:1.5,
     x:(stage_width/2 + this.dist),
     y:(stage_width/2)
 }
 
 GAME.monster.image = new Image();
-GAME.monster.image.src = "monsterImg.png";
+GAME.monster.image.src = "monsterImg.gif";
 
 GAME.monster.update = function(){
     this.angle += this.dangle*GAME.elapsed;
 
-    this.x = stage_width/2 + this.dist * Math.cos(this.angle);
-    this.y = stage_height/2 + this.dist * Math.sin(this.angle);
+    //this.x = stage_width/2 + this.dist * Math.cos(this.angle);
+    //this.y = stage_height/2 + this.dist * Math.sin(this.angle);
 }
 
 GAME.monster.draw = function(){
-    ctxt.drawImage(this.image, this.x, this.y);
+    ctxt.save();
+    ctxt.translate(stage_width/2, stage_height/2);
+    ctxt.rotate(this.angle);
+    ctxt.drawImage(this.image, this.dist, 0);
+    ctxt.restore();
 }
 
 GAME.play = function(){
