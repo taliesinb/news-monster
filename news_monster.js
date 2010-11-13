@@ -17,13 +17,13 @@ if(typeof Object.create !== "function"){
 
 /*function processKeyDown(e){
    if(e.keyCode === 37){ //left
-      GAME.monster.dx += GAME.elapsed*dr;
+      GAME.monster.angle += GAME.elapsed*GAME.monster.dangle;
    }
 
    if(e.keyCode === 39){ //right
-      GAME.monster.arc += -GAME.elapsed*dr;
+      GAME.monster.angle += -GAME.elapsed*GAME.monster.dangle;
    }
-}
+}*/
 
 GAME.draw_bg = function (){
 	
@@ -32,36 +32,25 @@ GAME.draw_bg = function (){
    ctxt.fillRect(0,0,stage_width,stage_height);
 }
 
-/*GAME.monster = {
-    arcRadius:100.0,
-    x:(stage_width/2-arcRadius), 
-    y:stage_width/2, 
-    dx:0, 
-    dy:0, 
-    ddx:0, 
-    ddy:0,//500,
-    radius:10,
-    arc: Math.PI,
-    dr:1
+GAME.monster = {
+    spin:0,
+    dist:100,
+    angle:0,
+    dangle:1,
+    x:(stage_width/3),
+    y:(stage_width/3)
 }
-/*
-GAME.monster.draw = function(){
-   ctxt.shadowColor = '#FFFFFF';
-   ctxt.strokeStyle = '#FFFFFF';
-   ctxt.fillStyle = '#FFFF00';
-   ctxt.shadowBlur = 40;
-   ctxt.beginPath();
-   ctxt.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
-   ctxt.closePath();
-   ctxt.fill();
-}
+
+GAME.monster.image = new Image();
+GAME.monster.image.src = "monsterImg.png";
 
 /*GAME.monster.update = function(){
+    this.
+}*/
 
-    this.x = Math.cos(this.arcRadius);
-    this.y = Math.sin(this.arcRadius);
+GAME.monster.draw = function(){
+    ctxt.drawImage(this.image, this.x, this.y);
 }
-*/
 
 GAME.play = function(){
    var d = new Date();
@@ -70,8 +59,8 @@ GAME.play = function(){
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
    
    GAME.draw_bg();
-   //GAME.monster.update();
-   //GAME.monster.draw();
+   
+   GAME.monster.draw();
 
    GAME.previousTime = timeNow;
 }
