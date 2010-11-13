@@ -15,15 +15,26 @@ if(typeof Object.create !== "function"){
 	}
 }
 
-/*function processKeyDown(e){
-   if(e.keyCode === 37){ //left
-      GAME.monster.angle += GAME.elapsed*GAME.monster.dangle;
-   }
+function processKeyDown(e){
+    var m = GAME.monster;
 
-   if(e.keyCode === 39){ //right
-      GAME.monster.angle += -GAME.elapsed*GAME.monster.dangle;
+   if(e.keyCode === 39){ //clockwise
+      if(m.dangle === 0){
+        m.dangle = m.dangleMax;
+      }
+      else if(m.dangle < 0){
+        m.dangle = 0;
+      }
    }
-}*/
+   else if(e.keyCode === 37){ //counterclockwise
+      if(m.dangle === 0){
+        m.dangle = -(m.dangleMax);
+      }
+      else if(m.dangle > 0){
+        m.dangle = 0;
+      }
+   }
+}
 
 GAME.draw_bg = function (){
 	
@@ -36,17 +47,21 @@ GAME.monster = {
     spin:0,
     dist:100,
     angle:0,
-    dangle:1,
-    x:(stage_width/3),
-    y:(stage_width/3)
+    dangle:0,
+    dangleMax:2,
+    x:(stage_width/2 + this.dist),
+    y:(stage_width/2)
 }
 
 GAME.monster.image = new Image();
 GAME.monster.image.src = "monsterImg.png";
 
-/*GAME.monster.update = function(){
-    this.
-}*/
+GAME.monster.update = function(){
+    this.angle += this.dangle*GAME.elapsed;
+
+    this.x = stage_width/2 + this.dist * Math.cos(this.angle);
+    this.y = stage_height/2 + this.dist * Math.sin(this.angle);
+}
 
 GAME.monster.draw = function(){
     ctxt.drawImage(this.image, this.x, this.y);
@@ -59,7 +74,7 @@ GAME.play = function(){
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
    
    GAME.draw_bg();
-   
+   GAME.monster.update();
    GAME.monster.draw();
 
    GAME.previousTime = timeNow;
