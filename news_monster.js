@@ -108,6 +108,40 @@ GAME.child = {
     }
 }
 
+GAME.meter = {
+   width: 200,
+   height: 20,
+   x: 10,
+   y: 10,
+   maxValence:1,
+   draw:function(){
+      var _x = this.x;
+      var _y = this.y;
+      var _w = this.width;
+      var _h = this.height;
+      var val = GAME.child.valence;
+      
+      if(val > this.maxValence){val = this.maxValence}
+      else if(val < -this.maxValence){val = -this.maxValence}
+      
+      ctxt.lineWidth = 4.0;
+      ctxt.strokeStyle='#000000';
+      ctxt.beginPath();
+      ctxt.rect(_x, _y, _w, _h);
+      ctxt.closePath();
+      ctxt.stroke();
+      if(val <= 0){
+         ctxt.fillStyle='#FF0000';
+         ctxt.fillRect(
+            _x + (1 - (val/(-this.maxValence)))*(_w/2),
+            _y, (val/(-this.maxValence))*(_w/2), _h);
+      }
+      else{
+         ctxt.fillStyle='#0000FF';
+         ctxt.fillRect(_x+_w/2, _y, (val/(this.maxValence))*(_w/2), _h);
+      }
+   }
+}
 
 
 GAME.text_prototype = function(str, val){
@@ -115,7 +149,7 @@ GAME.text_prototype = function(str, val){
     this.dist = 600;
     this.maxAngle = Math.PI/4;
     this.minAngle = -Math.PI/4;
-    this.speed = 100;
+    this.speed = 50;
     this.angle = 0;
     this.valence = val;
     this.exists = true;
@@ -175,7 +209,7 @@ GAME.play = function(){
    
    if(GAME.textCountdown <= 0 && headlines.length > 0){
       GAME.textCountdown = GAME.timeBetweenTexts;
-      var txt = new GAME.text_prototype(headlines.pop(), 0);
+      var txt = new GAME.text_prototype(headlines.pop(), .05);
       txt.setAngle();
       GAME.texts.push(txt);
    }
@@ -187,6 +221,7 @@ GAME.play = function(){
    GAME.draw_bg();
    GAME.monster.draw();
    GAME.child.draw();
+   GAME.meter.draw();
 
    var len = GAME.texts.length;
    
