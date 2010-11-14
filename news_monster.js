@@ -11,6 +11,7 @@ ctxt.font = "font-family:serif, font-size:12";
 
 function processKeyDown(e){
     var m = GAME.monster;
+    var expansionRate = 20;
 
    if(e.keyCode === 39){ //clockwise
       if(m.dangle === 0){
@@ -30,6 +31,23 @@ function processKeyDown(e){
         m.dangle = 0;
       }
    }
+   
+   if(e.keyCode === 38){
+      if(m.ddist === 0){
+         m.ddist = expansionRate;
+      }
+      else if(m.ddist < 0){
+         m.ddist = 0;
+      }
+   }
+   else if(e.keyCode === 40){
+      if(m.ddist === 0){
+         m.ddist = -expansionRate;
+      }
+      else if(m.ddist > 0){
+         m.ddist = 0;
+      }
+   }
 }
 
 function processKeyUp(){}
@@ -41,7 +59,8 @@ GAME.draw_bg = function (){
    ctxt.fillStyle='#FFFFFF';
    ctxt.fillRect(0,0,stage_width,stage_height);
    ctxt.beginPath();
-   ctxt.arc(0, stage_height/2, 80, -Math.PI/2, Math.PI/2, false);
+   ctxt.arc(0, stage_height/2, GAME.monster.dist+10, -Math.PI/2, Math.PI/2,
+      false);
    ctxt.closePath();
    ctxt.stroke();
    ctxt.beginPath();
@@ -53,6 +72,9 @@ GAME.draw_bg = function (){
 GAME.monster = {
     spin:0,
     dist:70,
+    ddist:0,
+    maxDist:160,
+    minDist:40,
     angle:-Math.PI/2,
     dangle:0,
     dangleMax:1.5,
@@ -68,6 +90,14 @@ GAME.monster.update = function(){
     var minAngle = -Math.PI/2;
 
     this.angle += this.dangle*GAME.elapsed;
+    this.dist += this.ddist*GAME.elapsed;
+    
+    if(this.dist > this.maxDist){
+       this.dist = this.maxDist;
+    }
+    else if(this.dist < this.minDist){
+       this.dist = this.minDist;
+    }
     
     if(this.angle > maxAngle){
         this.dangle = 0;
@@ -175,7 +205,7 @@ GAME.text_prototype = function(str, val){
         }
         else{
            this.dist -= this.speed*GAME.elapsed;
-           if(d <  200){
+           if(d <  GAME.monster.dist + 130){
               this.gap = this.gap*0.92;
            }
         }
