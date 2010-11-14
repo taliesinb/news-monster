@@ -95,9 +95,20 @@ GAME.monster.tick = function(){
     this.draw();
 }
 
-GAME.child = function(){
-    this.valence = 0.0;
+GAME.child = {
+    valence:0.0,
+    image:(new Image()),
+    src:"child1.gif",
+    update:function(){},
+    draw:function(){
+        if(!this.image.src){
+           this.image.src = this.src;
+        };
+        ctxt.drawImage(this.image, 0, stage_height/2 - 25);
+    }
 }
+
+
 
 GAME.text_prototype = function(str, val){
     this.content = str;
@@ -119,7 +130,7 @@ GAME.text_prototype = function(str, val){
         var d = this.dist;
         var a = this.angle;
         
-        if(d<=0){
+        if(d<=20){
             this.exists = false;
             GAME.child.valence += this.valence;
         }
@@ -155,7 +166,7 @@ GAME.text_prototype = function(str, val){
 
 GAME.texts = [];
 
-GAME.timeBetweenTexts = 1.0;
+GAME.timeBetweenTexts = 2.0;
 GAME.textCountdown = GAME.timeBetweenTexts;
 
 GAME.play = function(){
@@ -175,6 +186,7 @@ GAME.play = function(){
    
    GAME.draw_bg();
    GAME.monster.draw();
+   GAME.child.draw();
 
    var len = GAME.texts.length;
    
@@ -184,6 +196,7 @@ GAME.play = function(){
    
    //update everything
    GAME.monster.update();
+   GAME.child.update();
    
    for(var i = 0; i < len; i++){
       if( GAME.texts[i].exists){
