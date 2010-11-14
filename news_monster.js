@@ -173,9 +173,9 @@ GAME.play = function(){
    var timeNow = (new Date()).getTime();
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
    
-   if(GAME.textCountdown <= 0){
+   if(GAME.textCountdown <= 0 && headlines.length > 0){
       GAME.textCountdown = GAME.timeBetweenTexts;
-      var txt = new GAME.text_prototype("hello", 0);
+      var txt = new GAME.text_prototype(headlines.pop(), 0);
       txt.setAngle();
       GAME.texts.push(txt);
    }
