@@ -15,6 +15,7 @@ function processKeyDown(e){
    if(e.keyCode === 39){ //clockwise
       if(m.dangle === 0){
         m.dangle = m.dangleMax;
+        m.image.src = "monsterImg.gif";
       }
       else if(m.dangle < 0){
         m.dangle = 0;
@@ -23,6 +24,7 @@ function processKeyDown(e){
    else if(e.keyCode === 37){ //counterclockwise
       if(m.dangle === 0){
         m.dangle = -(m.dangleMax);
+        m.image.src = "monsterImg2.gif";
       }
       else if(m.dangle > 0){
         m.dangle = 0;
@@ -105,7 +107,8 @@ GAME.text_prototype = function(str, val){
     this.speed = 100;
     this.angle = 0;
     this.valence = val;
-    this.exists = true
+    this.exists = true;
+    this.gap = 9;
         
     this.setAngle = function(){
         this.angle = Math.random()*(this.maxAngle-this.minAngle) +
@@ -126,15 +129,21 @@ GAME.text_prototype = function(str, val){
         }
         else{
            this.dist -= this.speed*GAME.elapsed;
+           if(d <  200){
+              this.gap = this.gap*0.92;
+           }
         }
     };
     
     this.draw = function(){
+        var c = this.content;
         ctxt.save();
         ctxt.translate(0, stage_height/2);
         ctxt.rotate(this.angle);
         ctxt.fillStyle='#000000';
-        ctxt.fillText(this.content, this.dist, 0);
+        for(var i = 0; i < c.length; i++){
+           ctxt.fillText(c.charAt(i), this.dist+this.gap*i, 0);
+        }
         ctxt.restore();
     };
     
@@ -146,7 +155,7 @@ GAME.text_prototype = function(str, val){
 
 GAME.texts = [];
 
-GAME.timeBetweenTexts = 2.0;
+GAME.timeBetweenTexts = 1.0;
 GAME.textCountdown = GAME.timeBetweenTexts;
 
 GAME.play = function(){
