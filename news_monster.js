@@ -84,8 +84,66 @@ GAME.draw_welcome = function(){
     }
     
 GAME.draw_win = function(){
+   var good_boy = new Image();
+   good_boy.src = "child2.gif";
 
+   ctxt.lineWidth = 4.0;
+   ctxt.strokeStyle='#000000';
+   ctxt.fillStyle='#FFFFFF';
+   ctxt.fillRect(0,0,stage_width,stage_height);
+   ctxt.beginPath();
+   ctxt.rect(0,0,stage_width,stage_height);
+   ctxt.closePath();
+   ctxt.stroke();
 
+   ctxt.save();
+   ctxt.translate(30, 30);
+   ctxt.scale(3, 3);
+   ctxt.drawImage(good_boy, 0, 0);
+   ctxt.restore();
+   
+   ctxt.fillStyle='#000000';
+   ctxt.font = "48px Helvetica";
+   ctxt.fillText("Congratulations!", 200, 150);
+   ctxt.font = "24px Helvetica";
+   ctxt.fillText("Your child is well-informed,", 200, 200);
+   ctxt.fillText(" but not traumatized!", 200, 230);
+   
+   ctxt.font = "bold 30px Helvetica";
+    ctxt.fillText("PRESS ANY KEY TO PLAY AGAIN", stage_width/10, 400);
+}
+
+GAME.draw_lose = function(){
+   var good_boy = new Image();
+   good_boy.src = "child3.gif";
+
+   ctxt.lineWidth = 4.0;
+   ctxt.strokeStyle='#000000';
+   ctxt.fillStyle='#FFFFFF';
+   ctxt.fillRect(0,0,stage_width,stage_height);
+   ctxt.beginPath();
+   ctxt.rect(0,0,stage_width,stage_height);
+   ctxt.closePath();
+   ctxt.stroke();
+
+   ctxt.save();
+   ctxt.translate(30, 30);
+   ctxt.scale(3, 3);
+   ctxt.drawImage(good_boy, 0, 0);
+   ctxt.restore();
+   
+   ctxt.fillStyle='#000000';
+   ctxt.font = "48px Helvetica";
+   ctxt.fillText("Oh No!", 200, 150);
+   ctxt.font = "24px Helvetica";
+   ctxt.fillText("Your child is terrified!", 200, 200);
+   ctxt.font = "18px Helvetica";
+   ctxt.fillText(" He will most likely become a", 200, 220);
+   ctxt.fillText(" vagabond conspiracy theorist,", 200, 240);
+   ctxt.fillText(" or FOX news anchor.", 200, 260);
+   
+   ctxt.font = "bold 30px Helvetica";
+    ctxt.fillText("PRESS ANY KEY TO PLAY AGAIN", stage_width/10, 400);
 }
 
 GAME.draw_bg = function (){
@@ -175,8 +233,14 @@ GAME.meter = {
       var _h = this.height;
       var val = GAME.child.valence;
       
-      if(val > this.maxValence){val = this.maxValence}
-      else if(val < -this.maxValence){val = -this.maxValence}
+      if(val > this.maxValence){
+         val = this.maxValence;
+         GAME.mode = 2;
+      }
+      else if(val < -this.maxValence){
+         val = -this.maxValence;
+         GAME.mode = 3;
+      }
       
       ctxt.lineWidth = 4.0;
       ctxt.strokeStyle='#000000';
@@ -261,12 +325,20 @@ GAME.timeBetweenTexts = 2.0;
 GAME.textCountdown = GAME.timeBetweenTexts;
 
 GAME.play = function(){
+   var md = GAME.mode;
    
-   if(GAME.mode === 0){
+   if(md === 2){
         GAME.draw_welcome();
         return;
    }
-
+   else if(md === 3){
+        GAME.draw_win();
+        return;
+   }
+   else if(md === 0){
+        GAME.draw_lose();
+        return;
+   }
 
    var timeNow = (new Date()).getTime();
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
