@@ -7,32 +7,86 @@ var ctxt = canvas.getContext('2d');
 var stage_width = 600;
 var stage_height = 400;
 
-ctxt.font = "font-family:serif, font-size:12";
+GAME.mode = 0;//0-welcome, 1-play, 2-win, 3-lose
 
 function processKeyDown(e){
-    var m = GAME.monster;
-
-   if(e.keyCode === 39){ //clockwise
-      if(m.dangle === 0){
-        m.dangle = m.dangleMax;
-        m.image.src = "monsterImg.gif";
+    var p = GAME.mode;
+    if(p === 0){
+        GAME.mode = 1;
+    }
+    else if(p === 1){
+       var m = GAME.monster;
+   
+      if(e.keyCode === 39){ //clockwise
+           m.dangle = m.dangleMax;
+           m.image.src = "monsterImg.gif";
       }
-      else if(m.dangle < 0){
-        m.dangle = 0;
-      }
-   }
-   else if(e.keyCode === 37){ //counterclockwise
-      if(m.dangle === 0){
-        m.dangle = -(m.dangleMax);
-        m.image.src = "monsterImg2.gif";
-      }
-      else if(m.dangle > 0){
-        m.dangle = 0;
+      else if(e.keyCode === 37){ //counterclockwise
+           m.dangle = -(m.dangleMax);
+           m.image.src = "monsterImg2.gif";
       }
    }
+   else if(p === 2){
+        GAME.mode = 1;
+        GAME.child.valence = 0;
+    }
+    else if(p === 3){
+        GAME.mode = 1;
+        GAME.child.valence = 0;
+    }
 }
 
-function processKeyUp(){}
+function processKeyUp(e){
+   if(GAME.mode === 1){
+       GAME.monster.dangle = 0;
+    }
+}
+
+GAME.draw_welcome = function(){
+    var key = new Image();
+    key.src = "arrow.gif";
+
+    ctxt.lineWidth = 4.0;
+    ctxt.strokeStyle='#000000';
+    ctxt.fillStyle='#FFFFFF';
+    ctxt.fillRect(0,0,stage_width,stage_height);
+    ctxt.beginPath();
+    ctxt.rect(0,0,stage_width,stage_height);
+    ctxt.closePath();
+    ctxt.stroke();
+    
+    ctxt.save();
+    ctxt.translate(stage_width/8, stage_height/2);
+    ctxt.rotate(3*Math.PI/2);
+    ctxt.scale(3, 3);
+    ctxt.drawImage(GAME.monster.image, 0,0)
+    ctxt.restore();
+    
+    ctxt.save();
+    ctxt.translate(350, 110);
+    ctxt.scale(2.5, 2.5);
+    ctxt.drawImage(key, 0, 0);
+    ctxt.translate(76, 22);
+    ctxt.rotate(Math.PI);
+    ctxt.drawImage(key, 0, 0);
+    ctxt.restore();
+    
+    ctxt.fillStyle='#000000';
+    ctxt.font = "48px Helvetica";
+    ctxt.fillText("You are the news monster.", 10, 40);
+    ctxt.font = "24px Helvetica";
+    ctxt.fillText("use             and", stage_width/2, 150);
+    ctxt.fillText("Protect the child from tragic news while", stage_width/8,
+        250);
+    ctxt.fillText("allowing other news to get through.", stage_width/8, 275);
+    ctxt.font = "bold 30px Helvetica";
+    ctxt.fillText("PRESS ANY KEY TO START", stage_width/8, 400);
+    }
+    
+GAME.draw_win = function(){
+
+
+}
 
 GAME.draw_bg = function (){
 
@@ -166,9 +220,10 @@ GAME.text_prototype = function(str, val){
         
         if(d<=20){
             this.exists = false;
+            EvalSound('Wow');
             GAME.child.valence += this.valence;
         }
-        else if(d < 100 && d > 85 && a < GAME.monster.angle+.4
+        else if(d < 100 && d > 85 && a < GAME.monster.angle+.5
            && a > GAME.monster.angle + .1){
             this.exists = false;
             EvalSound('Chomp');
@@ -187,6 +242,7 @@ GAME.text_prototype = function(str, val){
         ctxt.translate(0, stage_height/2);
         ctxt.rotate(this.angle);
         ctxt.fillStyle='#000000';
+        ctxt.font = "font-family:serif, font-size:12";
         for(var i = 0; i < c.length; i++){
            ctxt.fillText(c.charAt(i), this.dist+this.gap*i, 0);
         }
@@ -205,6 +261,13 @@ GAME.timeBetweenTexts = 2.0;
 GAME.textCountdown = GAME.timeBetweenTexts;
 
 GAME.play = function(){
+   
+   if(GAME.mode === 0){
+        GAME.draw_welcome();
+        return;
+   }
+
+
    var timeNow = (new Date()).getTime();
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
    
@@ -220,15 +283,15 @@ GAME.play = function(){
    //draw everything
    
    GAME.draw_bg();
-   GAME.monster.draw();
    GAME.child.draw();
-   GAME.meter.draw();
 
    var len = GAME.texts.length;
    
    for(var i = 0; i<len; i++){
       GAME.texts[i].draw();
    }
+   GAME.monster.draw();
+   GAME.meter.draw();
    
    //update everything
    GAME.monster.update();
@@ -248,6 +311,8 @@ GAME.play = function(){
 
    GAME.previousTime = timeNow;
 }
+
+
 
 setInterval(GAME.play, 34);
 
