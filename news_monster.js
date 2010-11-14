@@ -216,3 +216,15 @@ GAME.play = function(){
 setInterval(GAME.play, 34);
 
 //********************************************
+
+var headlines = [];
+
+function pipeCallback(obj) 
+{
+	var key, value;
+	var	items = obj.value.items;
+	for (key in items)
+	{
+		headlines.push(items[key].content);
+	}
+}
