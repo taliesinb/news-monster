@@ -171,6 +171,7 @@ GAME.text_prototype = function(str, val){
         else if(d < 100 && d > 85 && a < GAME.monster.angle+.4
            && a > GAME.monster.angle + .1){
             this.exists = false;
+            EvalSound('Chomp');
         }
         else{
            this.dist -= this.speed*GAME.elapsed;
