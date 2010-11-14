@@ -43,6 +43,8 @@ function processKeyUp(e){
 }
 
 GAME.draw_welcome = function(){
+    canvas.width = canvas.width;
+
     var key = new Image();
     key.src = "arrow.gif";
 
@@ -56,10 +58,8 @@ GAME.draw_welcome = function(){
     ctxt.stroke();
     
     ctxt.save();
-    ctxt.translate(stage_width/8, stage_height/2);
-    ctxt.rotate(3*Math.PI/2);
     ctxt.scale(3, 3);
-    ctxt.drawImage(GAME.monster.image, 0,0)
+    ctxt.drawImage(GAME.monster.image, 25,25)
     ctxt.restore();
     
     ctxt.save();
@@ -84,6 +84,8 @@ GAME.draw_welcome = function(){
     }
     
 GAME.draw_win = function(){
+   canvas.width = canvas.width;
+
    var good_boy = new Image();
    good_boy.src = "child2.gif";
 
@@ -114,6 +116,8 @@ GAME.draw_win = function(){
 }
 
 GAME.draw_lose = function(){
+   canvas.width = canvas.width;
+
    var good_boy = new Image();
    good_boy.src = "child3.gif";
 
@@ -327,15 +331,15 @@ GAME.textCountdown = GAME.timeBetweenTexts;
 GAME.play = function(){
    var md = GAME.mode;
    
-   if(md === 2){
+   if(md === 0){
         GAME.draw_welcome();
         return;
    }
-   else if(md === 3){
+   else if(md === 2){
         GAME.draw_win();
         return;
    }
-   else if(md === 0){
+   else if(md === 3){
         GAME.draw_lose();
         return;
    }
@@ -345,7 +349,7 @@ GAME.play = function(){
    
    if(GAME.textCountdown <= 0 && headlines.length > 0){
       GAME.textCountdown = GAME.timeBetweenTexts;
-      var txt = new GAME.text_prototype(headlines.pop(), .05);
+      var txt = new GAME.text_prototype(headlines.pop(), -.25);
       txt.setAngle();
       GAME.texts.push(txt);
    }
