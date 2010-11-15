@@ -310,6 +310,7 @@ GAME.text_prototype = function(str, val){
            if(d < 300) this.gap *= 0.995;
            if(d < 150) this.gap = this.gap*0.97;
            if(d < 120) this.gap = this.gap*0.95;
+           if(d < 112) this.gap = this.gap*0.90;
 
         }
     };
@@ -406,7 +407,7 @@ GAME.play = function(){
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
    
    if(GAME.textCountdown <= 0 && headlines.length > 0){
-      GAME.textCountdown = GAME.timeBetweenTexts;
+      GAME.textCountdown = GAME.timeBetweenTexts * (0.3 + Math.random());
 
 	      var obj = pop_suitable_headline();
 

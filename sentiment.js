@@ -18,7 +18,7 @@ army = "army navy soldier marine armed guard military weapon wmd destruction ter
 
 with_valency(army, -4);
 
-crime = "manslaughter police raid drug abusive dui drunk-driving crash confiscate smuggle seizedrink drunk arrest charge lawsuit force batter broke crime thief criminal penal sentence fine guilty plead cheat steal fraud pyramid defraud stole corrupt bribe kickback sue lobby";
+crime = "manslaughter police raid drug abusive dui drunk-driving crash confiscate smuggle seizedrink drunk arrest charge lawsuit force batter broke crime thief criminal penal sentence fine guilty plead cheat steal fraud pyramid defraud stole corrupt bribe kickback sue lobby protest riot looting";
 
 with_valency(crime, -3);
 
