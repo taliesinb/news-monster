@@ -6,6 +6,10 @@ var canvas = document.getElementById('myCanvas');
 var ctxt = canvas.getContext('2d');
 var stage_width = 600;
 var stage_height = 400;
+var browser = "";
+var user_agent = navigator.userAgent;
+var browsers = ["Firefox", "Chrome", "Safari"];
+var base_font = 48;
 
 GAME.mode = 0;//0-welcome, 1-play, 2-win, 3-lose
 
@@ -277,7 +281,7 @@ GAME.text_prototype = function(str, val){
     this.angle = 0;
     this.valence = val;
     this.exists = true;
-    this.gap = 9;
+    this.gap = 7;
         
     this.setAngle = function(){
         this.angle = Math.random()*(this.maxAngle-this.minAngle) +
@@ -312,7 +316,7 @@ GAME.text_prototype = function(str, val){
         ctxt.translate(0, stage_height/2);
         ctxt.rotate(this.angle);
         ctxt.fillStyle='#000000';
-        ctxt.font = "font-family:serif, font-size:12";
+        ctxt.font = "14px Times New Roman";
         for(var i = 0; i < c.length; i++){
            ctxt.fillText(c.charAt(i), this.dist+this.gap*i, 0);
         }
@@ -439,8 +443,6 @@ GAME.play = function(){
 
    GAME.previousTime = timeNow;
 }
-
-
 
 setInterval(GAME.play, 34);
 
