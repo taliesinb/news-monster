@@ -80,7 +80,7 @@ GAME.draw_welcome = function(){
         250);
     ctxt.fillText("allowing other news to get through.", stage_width/8, 275);
     ctxt.font = "bold 30px Helvetica";
-    ctxt.fillText("PRESS ANY KEY TO START", stage_width/8, 400);
+    ctxt.fillText("PRESS ANY KEY TO START", stage_width/8, 390);
     }
     
 GAME.draw_win = function(){
@@ -246,12 +246,6 @@ GAME.meter = {
          GAME.mode = 3;
       }
       
-      ctxt.lineWidth = 4.0;
-      ctxt.strokeStyle='#000000';
-      ctxt.beginPath();
-      ctxt.rect(_x, _y, _w, _h);
-      ctxt.closePath();
-      ctxt.stroke();
       if(val <= 0){
          ctxt.fillStyle='#FF0000';
          ctxt.fillRect(
@@ -262,6 +256,14 @@ GAME.meter = {
          ctxt.fillStyle='#0000FF';
          ctxt.fillRect(_x+_w/2, _y, (val/(this.maxValence))*(_w/2), _h);
       }
+
+	ctxt.lineWidth = 4.0;
+	ctxt.strokeStyle='#000000';
+	ctxt.beginPath();
+	ctxt.rect(_x, _y, _w, _h);
+	ctxt.closePath();
+	ctxt.stroke();
+
    }
 }
 
@@ -298,9 +300,11 @@ GAME.text_prototype = function(str, val){
         }
         else{
            this.dist -= this.speed*GAME.elapsed;
-           if(d <  150){
-              this.gap = this.gap*0.90;
-           }
+           if(d <  500) this.gap = this.gap*0.9999;
+           if(d < 300) this.gap *= 0.995;
+           if(d < 150) this.gap = this.gap*0.97;
+           if(d < 120) this.gap = this.gap*0.95;
+
         }
     };
     
@@ -312,7 +316,8 @@ GAME.text_prototype = function(str, val){
         ctxt.fillStyle='#000000';
         ctxt.font = "font-family:serif, font-size:12";
         for(var i = 0; i < c.length; i++){
-           ctxt.fillText(c.charAt(i), this.dist+this.gap*i, 0);
+        	if (Math.abs(this.angle) > Math.PI/8) ctxt.rotate(this.gap * -this.angle/1000);
+            ctxt.fillText(c.charAt(i), this.dist+this.gap*i, 0);
         }
         ctxt.restore();
     };
@@ -398,7 +403,6 @@ GAME.play = function(){
       GAME.textCountdown = GAME.timeBetweenTexts;
 
 	      var obj = pop_suitable_headline();
-	      console.log(obj.headline, " ", obj.score);
 
 	      var txt = new GAME.text_prototype(obj.headline, obj.score);
     	  txt.setAngle();
