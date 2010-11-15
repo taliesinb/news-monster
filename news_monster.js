@@ -29,10 +29,12 @@ function processKeyDown(e){
    else if(p === 2){
         GAME.mode = 1;
         GAME.child.valence = 0;
+        GAME.texts = [];
     }
     else if(p === 3){
         GAME.mode = 1;
         GAME.child.valence = 0;
+        GAME.texts = [];
     }
 }
 
