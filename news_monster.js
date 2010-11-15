@@ -328,6 +328,51 @@ GAME.texts = [];
 GAME.timeBetweenTexts = 2.0;
 GAME.textCountdown = GAME.timeBetweenTexts;
 
+eastereggs = [
+	"Cure to cancer discovered, hope for millions", 
+	"Poverty ended",
+	"Nelson Mandela saved by three-legged puppy",
+	"Peace in the Middle East",
+	"Lollipop subsidy announced",
+	"Jane McGonigal awarded MacArthur grant"
+	];
+
+function pop_suitable_headline()
+{
+	var head, score;
+	
+	if (Math.random() < 0.03 && eastereggs.length)
+	{
+		head = eastereggs.pop();
+		score = +0.5;
+		
+	} else {
+	
+		head = headlines.pop();
+		headlines = headlines.reverse().push(head).reverse();
+		score = total_score(head);
+		
+		var sign = -1;
+		if (score > 0) sign = 1;
+		score = Math.abs(score);
+		if (score > 6) score = 0.1;
+		else if (score > 2) score = 0.06;
+		else if (score > 0) score = 0.03;
+		else score = 0;
+		
+		score = score * sign;
+	}	
+		
+	if (score == 0 && head.split(' ').length < 4)
+	{	
+		return pop_suitable_headline();
+	}
+	
+	if (score == 0) score = 0.05;
+	
+	return {"headline": head, "score": score};
+}
+
 GAME.play = function(){
    var md = GAME.mode;
    
@@ -349,9 +394,13 @@ GAME.play = function(){
    
    if(GAME.textCountdown <= 0 && headlines.length > 0){
       GAME.textCountdown = GAME.timeBetweenTexts;
-      var txt = new GAME.text_prototype(headlines.pop(), -.25);
-      txt.setAngle();
-      GAME.texts.push(txt);
+
+	      var obj = pop_suitable_headline();
+	      console.log(obj.headline, " ", obj.score);
+
+	      var txt = new GAME.text_prototype(obj.headline, obj.score);
+    	  txt.setAngle();
+    	  GAME.texts.push(txt);
    }
    else{
       GAME.textCountdown -= GAME.elapsed;

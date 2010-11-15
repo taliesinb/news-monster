@@ -10,33 +10,33 @@ function with_valency(sentence, value)
 	}
 }
 
-violence = "blood bone kill death dead horrible grisly brutal injure beat assault stab shoot shot wound hit punch kick maim murder torture sex scandal abuse prison imprison jail parole molest victim wound abduct kidnap casualty"
+violence = "violence blood bone die dies kill death dead horrible grisly brutal injure beat assault stab shoot shot wound hit punch kick maim murder torture sex scandal holocaust abuse prison imprison jail parole molest victim wound abduct kidnap casualty blast clashes suicide hurt"
 
-with_valency(violence, 5);
+with_valency(violence, -5);
 
-army = "army navy soldier marine armed guard military weapon wmd destruction terror terrorism attack ambush explosion explode explosive bomb gun bullet armor grenade mortar prisoner war battle skurmish invasion occupation invade predator drone defeat";
+army = "army navy soldier marine armed guard military weapon wmd destruction terror terrorism attack ambush explosion explode explosive bomb gun bullet armor grenade mortar prisoner war battle skurmish invasion occupation invade predator drone defeat al-qaeda pirate";
 
-with_valency(army, 4);
+with_valency(army, -4);
 
 crime = "police raid drug arrest charge lawsuit force batter broke crime thief criminal penal sentence fine guilty plead cheat steal fraud pyramid defraud stole corrupt bribe kickback sue lobby";
 
-with_valency(crime, 3);
+with_valency(crime, -3);
 
-disaster = "fire collapse destroy damage implode explode detonate desperate toll fear missing lost worry orphan disaster catastrophe evacuate flee";
+disaster = "accident fire collapse destroy damage implode explode detonate desperate toll fear missing lost worry orphan disaster catastrophe evacuate flee";
 
-with_valency(disaster, 3);
+with_valency(disaster, -3);
 
-medical = "toxin toxic pollution pollute poison unsafe unhealthy plague epidemic illness hiv aids malaria cancer disease starvation burn transplant hospital medical patient intensive doctor emergency chemical evacuate"; 
+medical = "cholera toxin toxic pollution pollute poison unsafe unhealthy plague epidemic illness hiv aids malaria cancer disease starvation burn transplant hospital medical patient intensive doctor emergency chemical evacuate"; 
 
-with_valency(medical, 3);
+with_valency(medical, -2);
 
-negative = "dangerous ugly nasty bad worse fear worry concern argue conflict angry furious disgust shame anger hate dislike negative no deny fail defeat"; 
+negative = "dangerous ugly nasty bad worse fear worry concern argue conflict angry furious disgust shame anger hate dislike negative no deny fail defeat sorrow found risk troubled resign suspended fired blamed tension"; 
 
-with_valency(negative, 1);
+with_valency(negative, -1);
 
-positive = "hope victory hero save benefit miracle friend help charity donation philanthrop cure community win victory progress growth children"
+positive = "hope victory hero save benefit miracle friend help charity donation philanthrop cure community win victory progress growth children award vow free democracy elections welcomed"
 
-with_valency(positive, -3);
+with_valency(positive, 3);
 
 function tokenize(sentence)
 {
