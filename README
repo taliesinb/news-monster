@@ -1,1 +1,5 @@
-Good morning, Tali.
+Our http://gameful.org/ game jam game. RSS news feeds are reformatted as injectable JSON using a Yahoo Pipe, loaded from the browser, and then primitive sentiment analysis is performed to judge each headline to be 'good' or 'bad'. You, as a helpful monster, must eat the 'bad' headlines before they reach the child. 
+
+However, the child needs some 'good' headlines to educate himself and grow.
+
+Credits are Rob for the graphics and game engine, Tali for the rather simple newsfeed loading and sentiment analysis.  
