@@ -112,7 +112,7 @@ GAME.draw_win = function(){
    ctxt.fillText(" but not traumatized!", 200, 230);
    
    ctxt.font = "bold 30px Helvetica";
-    ctxt.fillText("PRESS ANY KEY TO PLAY AGAIN", stage_width/10, 400);
+    ctxt.fillText("PRESS ANY KEY TO PLAY AGAIN", stage_width/10, 390);
 }
 
 GAME.draw_lose = function(){
@@ -147,7 +147,7 @@ GAME.draw_lose = function(){
    ctxt.fillText(" or FOX news anchor.", 200, 260);
    
    ctxt.font = "bold 30px Helvetica";
-    ctxt.fillText("PRESS ANY KEY TO PLAY AGAIN", stage_width/10, 400);
+    ctxt.fillText("PRESS ANY KEY TO PLAY AGAIN", stage_width/10, 390);
 }
 
 GAME.draw_bg = function (){
@@ -451,6 +451,19 @@ setInterval(GAME.play, 34);
 
 var headlines = [];
 
+//shuffles list in-place
+function shuffle(list) {
+  var i, j, t;
+  for (i = 1; i < list.length; i++) {
+    j = Math.floor(Math.random()*(1+i));  // choose j in [0..i]
+    if (j != i) {
+      t = list[i];                        // swap list[i] and list[j]
+      list[i] = list[j];
+      list[j] = t;
+    }
+  }
+}
+
 function pipeCallback(obj) 
 {
 	var key, value;
@@ -459,4 +472,5 @@ function pipeCallback(obj)
 	{
 		headlines.push(items[key].content);
 	}
+	shuffle(headlines);
 }

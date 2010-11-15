@@ -18,7 +18,7 @@ army = "army navy soldier marine armed guard military weapon wmd destruction ter
 
 with_valency(army, -4);
 
-crime = "police raid drug arrest charge lawsuit force batter broke crime thief criminal penal sentence fine guilty plead cheat steal fraud pyramid defraud stole corrupt bribe kickback sue lobby";
+crime = "manslaughter police raid drug abusive dui drunk-driving crash confiscate smuggle seizedrink drunk arrest charge lawsuit force batter broke crime thief criminal penal sentence fine guilty plead cheat steal fraud pyramid defraud stole corrupt bribe kickback sue lobby";
 
 with_valency(crime, -3);
 
@@ -26,11 +26,11 @@ disaster = "accident fire collapse destroy damage implode explode detonate despe
 
 with_valency(disaster, -3);
 
-medical = "cholera toxin toxic pollution pollute poison unsafe unhealthy plague epidemic illness hiv aids malaria cancer disease starvation burn transplant hospital medical patient intensive doctor emergency chemical evacuate"; 
+medical = "addict heroin crack amphetamine speed nicotine smoking cigarettes sex unprotected oral cervical rectal tumor tumour colon kidney lung liver heart brain amputate alcohol marijuana weed ecstacy cocaine cholera toxin toxic pollution pollute poison unsafe unhealthy plague epidemic illness hiv aids malaria cancer disease starvation burn transplant hospital medical patient intensive doctor emergency chemical evacuate"; 
 
 with_valency(medical, -2);
 
-negative = "dangerous ugly nasty bad worse fear worry concern argue conflict angry furious disgust shame anger hate dislike negative no deny fail defeat sorrow found risk troubled resign suspended fired blamed tension"; 
+negative = "dangerous ugly nasty bad worse fear worry concern argue conflict angry furious disgust shame anger hate dislike negative no deny fail defeat sorrow found risk troubled resign suspended fired blamed tension harmful"; 
 
 with_valency(negative, -1);
 
