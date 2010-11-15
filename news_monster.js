@@ -400,7 +400,6 @@ GAME.play = function(){
       GAME.textCountdown = GAME.timeBetweenTexts;
 
 	      var obj = pop_suitable_headline();
-	      console.log(obj.headline, " ", obj.score);
 
 	      var txt = new GAME.text_prototype(obj.headline, obj.score);
     	  txt.setAngle();
