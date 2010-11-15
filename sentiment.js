@@ -10,15 +10,15 @@ function with_valency(sentence, value)
 	}
 }
 
-violence = "violence blood bone die dies kill death dead horrible grisly brutal injure beat assault stab shoot shot wound hit punch kick maim murder torture sex scandal holocaust abuse prison imprison jail parole molest victim wound abduct kidnap casualty blast clashes suicide hurt"
+violence = "trauma harass violence blood bone die dies kill death dead horrible grisly brutal injure beat assault stab shoot shot wound hit punch kick maim murder torture sex scandal holocaust abuse prison imprison jail parole molest victim wound abduct kidnap casualty blast clashes suicide hurt"
 
 with_valency(violence, -5);
 
-army = "army navy soldier marine armed guard military weapon wmd destruction terror terrorism attack ambush explosion explode explosive bomb gun bullet armor grenade mortar prisoner war battle skurmish invasion occupation invade predator drone defeat al-qaeda pirate";
+army = "army navy soldier marine guard military weapon wmd destruction terror terrorism attack ambush explosion explode explosive blast bomb gun bullet armor grenade mortar prisoner war battle skurmish invasion occupation invade predator drone defeat al-qaeda pirate spy agent";
 
 with_valency(army, -4);
 
-crime = "manslaughter police raid drug abusive dui drunk-driving crash confiscate smuggle seizedrink drunk arrest charge lawsuit force batter broke crime thief criminal penal sentence fine guilty plead cheat steal fraud pyramid defraud stole corrupt bribe kickback sue lobby protest riot looting";
+crime = "violent violation armed manslaughter pedo police raid drug abusive dui drunk-driving crash confiscate smuggle seizedrink drunk arrest charge lawsuit force batter broke crime thief criminal penal sentence fine guilty plead cheat steal fraud pyramid defraud stole corrupt bribe kickback sue lobby protest riot looting robbery heist";
 
 with_valency(crime, -3);
 
@@ -30,11 +30,11 @@ medical = "addict heroin crack amphetamine speed nicotine smoking cigarettes sex
 
 with_valency(medical, -2);
 
-negative = "dangerous ugly nasty bad worse fear worry concern argue conflict angry furious disgust shame anger hate dislike negative no deny fail defeat sorrow found risk troubled resign suspended fired blamed tension harmful"; 
+negative = "dangerous ugly nasty bad worse fear worry concern argue conflict angry furious disgust shame anger hate dislike negative no deny fail defeat sorrow found risk troubled resign suspended fired blamed tension harmful provoke dismiss criticize aggressive serious"; 
 
 with_valency(negative, -1);
 
-positive = "hope victory hero save benefit miracle friend help charity donation philanthrop cure community win victory progress growth children award vow free democracy elections welcomed agree treaty peace ceasefire"
+positive = "hope victory hero save benefit miracle friend help charity donation philanthrop cure community win victory progress growth children award vow free democracy elections welcomed agree treaty peace ceasefire positive rescued glory redemption historic breakthrough prize medal honor honour congraulate win record triump trophy happy";
 
 with_valency(positive, 3);
 
