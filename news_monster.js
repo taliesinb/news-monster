@@ -298,8 +298,8 @@ GAME.text_prototype = function(str, val){
         }
         else{
            this.dist -= this.speed*GAME.elapsed;
-           if(d <  200){
-              this.gap = this.gap*0.92;
+           if(d <  150){
+              this.gap = this.gap*0.90;
            }
         }
     };
@@ -349,7 +349,9 @@ function pop_suitable_headline()
 	} else {
 	
 		head = headlines.pop();
-		headlines = headlines.reverse().push(head).reverse();
+		headlines = headlines.reverse();
+		headlines.push(head);
+		headlines = headlines.reverse();
 		score = total_score(head);
 		
 		var sign = -1;

@@ -34,7 +34,7 @@ negative = "dangerous ugly nasty bad worse fear worry concern argue conflict ang
 
 with_valency(negative, -1);
 
-positive = "hope victory hero save benefit miracle friend help charity donation philanthrop cure community win victory progress growth children award vow free democracy elections welcomed"
+positive = "hope victory hero save benefit miracle friend help charity donation philanthrop cure community win victory progress growth children award vow free democracy elections welcomed agree treaty peace ceasefire"
 
 with_valency(positive, 3);
 
