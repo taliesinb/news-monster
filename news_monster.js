@@ -279,11 +279,11 @@ GAME.text_prototype = function(str, val){
     this.dist = 600;
     this.maxAngle = Math.PI/4;
     this.minAngle = -Math.PI/4;
-    this.speed = 50;
+    this.speed = 30;
     this.angle = 0;
     this.valence = val;
     this.exists = true;
-    this.gap = 7;
+    this.gap = 8;
         
     this.setAngle = function(){
         this.angle = Math.random()*(this.maxAngle-this.minAngle) +
@@ -306,11 +306,11 @@ GAME.text_prototype = function(str, val){
         }
         else{
            this.dist -= this.speed*GAME.elapsed;
-           if(d <  500) this.gap = this.gap*0.9999;
-           if(d < 300) this.gap *= 0.995;
-           if(d < 150) this.gap = this.gap*0.97;
-           if(d < 120) this.gap = this.gap*0.95;
-           if(d < 112) this.gap = this.gap*0.90;
+           if(d <  200) this.gap = this.gap*0.999;
+           if(d < 180) this.gap *= 0.995;
+           if(d < 140) this.gap = this.gap*0.98;
+           if(d < 120) this.gap = this.gap*0.96;
+           if(d < 115) this.gap = this.gap*0.90;
 
         }
     };
@@ -324,7 +324,7 @@ GAME.text_prototype = function(str, val){
         ctxt.font = "14px Times New Roman";
         for(var i = 0; i < c.length; i++){
         	if (Math.abs(this.angle) > Math.PI/8) ctxt.rotate(this.gap * -this.angle/1000);
-            ctxt.fillText(c.charAt(i), this.dist+this.gap*i, 0);
+            ctxt.fillText(c.charAt(i), this.dist+this.gap*i - (i == 0 ? 4 : 0), 0);
         }
         ctxt.restore();
     };
@@ -407,7 +407,7 @@ GAME.play = function(){
    GAME.elapsed = (timeNow-GAME.previousTime)/1000;
    
    if(GAME.textCountdown <= 0 && headlines.length > 0){
-      GAME.textCountdown = GAME.timeBetweenTexts * (0.3 + Math.random());
+      GAME.textCountdown = GAME.timeBetweenTexts * (0.6 + Math.random());
 
 	      var obj = pop_suitable_headline();
 

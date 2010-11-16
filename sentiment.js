@@ -26,7 +26,7 @@ disaster = "accident fire collapse destroy damage implode explode detonate despe
 
 with_valency(disaster, -3);
 
-medical = "addict heroin crack amphetamine speed nicotine smoking cigarettes sex unprotected oral cervical rectal tumor tumour colon kidney lung liver heart brain amputate alcohol marijuana weed ecstacy cocaine cholera toxin toxic pollution pollute poison unsafe unhealthy plague epidemic illness hiv aids malaria cancer disease starvation burn transplant hospital medical patient intensive doctor emergency chemical evacuate"; 
+medical = "addict heroin crack amphetamine speed nicotine smoking cigarettes sex unprotected oral cervical rectal tumor tumour colon kidney lung liver heart brain amputate alcohol marijuana weed ecstacy cocaine cholera toxin toxic pollution pollute poison unsafe unhealthy plague epidemic illness hiv aids malaria cancer disease starvation burn transplant hospital medical patient intensive doctor emergency chemical evacuate fracture skull"; 
 
 with_valency(medical, -2);
 
