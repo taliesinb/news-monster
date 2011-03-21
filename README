@@ -1,5 +1,9 @@
-Our http://gameful.org/ game jam game. RSS news feeds are reformatted as injectable JSON using a Yahoo Pipe, loaded from the browser, and then primitive sentiment analysis is performed to judge each headline to be 'good' or 'bad'. You, as a helpful monster, must eat the 'bad' headlines before they reach the child. 
+Our http://gameful.org/ 48-hour game jam game. RSS news feeds are reformatted as injectable JSON using a Yahoo Pipe, loaded from the browser, and then primitive sentiment analysis is performed to judge each headline to be 'good' or 'bad'. You, as a helpful monster, must eat the 'bad' headlines before they reach the child. 
 
 However, the child needs some 'good' headlines to educate himself and grow.
 
 Credits are Rob for the graphics and game engine, Tali for the rather simple newsfeed loading and sentiment analysis.  
+
+I probably only spent 5 or 6 hours on this, mostly getting used to Yahoo Pipes as a mechanism to gather and feed a collection of RSS sources through to the client code, plus a bit of extremely simple word-matching to estimate sentiment of each news source.
+
+This code is not friendly to all browsers. In particular Chrome will throw a hissy fit. This was much more a proof-of-concept of taking live web data and integrating it in an intelligent way into a game. Which worked, BTW. 
