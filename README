@@ -1,3 +1,7 @@
+A short collaborative project between Robert Lockhart (http://www.bobbylox.com/) and Taliesin Beynon (http://taliesinb.net), made over a weekend on a lark. 
+
+You can actually play this game on Rob Lockhart's site at http://www.bobbylox.com/Site/news_monster/index.html
+
 Our http://gameful.org/ 48-hour game jam game. RSS news feeds are reformatted as injectable JSON using a Yahoo Pipe, loaded from the browser, and then primitive sentiment analysis is performed to judge each headline to be 'good' or 'bad'. You, as a helpful monster, must eat the 'bad' headlines before they reach the child. 
 
 However, the child needs some 'good' headlines to educate himself and grow.
